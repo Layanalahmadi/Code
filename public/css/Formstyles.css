@@ -15,7 +15,6 @@ body {
 	padding: 20px;
 }
 
-/* sidebar styles */
 .wrapper {
 	background: #ffffff;
 	height: calc(100vh - 40px);
@@ -23,10 +22,6 @@ body {
 	flex-direction: row-reverse; 
 }
 
-.side_bar {
-	width: 250px;
-	height: 100%;
-}
 
 .main_container {
 	width: calc(100% - 250px);
@@ -39,113 +34,82 @@ body {
 	margin-bottom: 20px;
 }
 
+.side_bar {
+    position: fixed; /* Keeps the sidebar fixed */
+    top: 0;
+    right: 0; /* Aligns the sidebar to the right */
+    width: 280px; /* Adjust the width as needed */
+    height: 100vh; /* Full viewport height */
+    background: #3E8C74; /* Sidebar background */
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    z-index: 1000; /* Ensures the sidebar stays on top of the content */
+}
+
 .side_bar .side_bar_top {
-	background: #3E8C74;
-	height: 250px;
-	border-top-right-radius: 15px; 
-	border-top-left-radius: 15px; 
-	padding: 30px;
-}
-
-.side_bar .side_bar_top .picture {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 20px;	
-}
-
-.side_bar .side_bar_top .picture img {
-	width: 105px;
-	height: 100px;
-	padding: 5px;
-}
-
-.side_bar .side_bar_top .info h3 {
-	text-align: center;
-	color: #fff;
-}
-
-.side_bar .side_bar_top .info p {
-	margin-top: 5px;
-	font-size: 12px;	
-    text-align: center;
+    background: #3E8C74;
+    height: 250px;
+    padding: 30px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 15px;
 }
 
 .side_bar .side_bar_bottom {
-	background: #3E8C74;
-	height: calc(100% - 250px);
-	padding: 20px 0;
-	padding-right: 15px; 
-	border-bottom-right-radius: 15px; 
-	border-bottom-left-radius: 15px; 
+    background: #3E8C74;
+    flex-grow: 3; /* Takes up the remaining space in the sidebar */
+    padding: 20px 0;
+    padding-left: 15px; /* Padding adjusted for right-aligned layout */
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 15px;
+    overflow-y: auto; /* Adds scroll if content overflows */
+
 }
 
-.side_bar .side_bar_bottom ul li {
-	position: relative;
+.side_bar .side_bar_bottom ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 30px;
 }
 
 .side_bar .side_bar_bottom ul li a {
-	display: block;
-	padding: 15px;		
-	font-size: 14px;
-	color: #ffffff;
-	margin-bottom: 5px;			
+    display: block;
+    padding: 15px;		
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 5px;			
     text-align: center;	
-}
-
-.side_bar .side_bar_bottom ul li a .icon {
-	margin-left: 8px; 
+    border-radius: 10px;
 }
 
 .side_bar .side_bar_bottom ul li.active a {
-	background: #ffffff;
-	color: #1C4A69;
-	border-top-right-radius: 25px;
-	border-bottom-right-radius: 25px; 
+    background: #ffffff;
+    color: #1C4A69;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px; 
 }
 
-.side_bar .side_bar_bottom ul li.active .top_curve,
-.side_bar .side_bar_bottom ul li.active .bottom_curve {
-	position: absolute;
-	right: 0; 
-	width: 100%;
-	height: 20px;
-	background: #ffffff;
+/* Adjust the content to avoid it being hidden under the sidebar */
+.content {
+    margin-right: 250px; /* Ensure content is not under the sidebar */
+    padding: 20px;
 }
 
-.side_bar .side_bar_bottom ul li.active .top_curve {
-	top: -20px;
-}
 
-.side_bar .side_bar_bottom ul li.active .bottom_curve {
-	bottom: -20px;	
-}
-
-.side_bar .side_bar_bottom ul li.active .top_curve:before,
-.side_bar .side_bar_bottom ul li.active .bottom_curve:before {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0; 
-	width: 100%;
-	height: 100%;
-	background: #3E8C74;	
-}
-
-.side_bar .side_bar_bottom ul li.active .top_curve:before {
-	border-bottom-left-radius: 25px; 
-}
-
-.side_bar .side_bar_bottom ul li.active .bottom_curve:before {
-	border-top-left-radius: 25px; 
-}
-
-/* Hide all containers */
+/* Hide all containers initially */
 .dashboard_container,
 .location_container,
 .report_container,
 .recommendations_container {
 	display: none;
 }
+
+
+
+
+
 
 /* location container */
 @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap'); 
@@ -180,6 +144,15 @@ body {
     background: white;
 }
 
+.location_container {
+    width: 120%; /* This makes the container wider than its parent */
+    height: 90%;
+    position: relative;
+    left: -80%; /*  center the container */
+    top: -100px; /* to lift it up */
+    box-sizing: border-box;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -193,8 +166,10 @@ h1,h2,h3 {
     margin: 0 0 0.5em;
 }
 img {
-    max-width: 100%;
+    max-width: 70%;
     vertical-align: middle;
+    align-items: center;
+    margin-right: 24px;
 }
 ::placeholder {
     color: var(--lighter-color);
@@ -215,11 +190,6 @@ img {
     background-color: #faf9f9;
     position: relative;
 }
-.location_container {
-    width: 80%;
-    height: 100%;
-}
-
 /* progress */
 .form-box .progress {
     position: relative;
@@ -286,6 +256,7 @@ img {
     font-size: 12px;
 }
 
+
 /* Form styles*/
 .form-box form {
     width: 100%;
@@ -329,6 +300,21 @@ form > div:not(.btn-group) {
     animation: fadeIn .6s cubic-bezier(0.39, 0.575, 0.565, 1 ) both ;
 }
 
+/*Side bar*/
+.recommendations_container {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.content-container {
+    display: none; /* إخفاء جميع المحتويات */
+}
+.content-container.active {
+    display: block; /* عرض المحتوى النشط فقط */
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -349,40 +335,32 @@ form > div.active {
 
 .btn-group {
     display: flex;
-    gap: 4em;
+    gap: 1em;
     flex-wrap: wrap;
     margin-top: 2em;
-    justify-content: center; 
+    justify-content: space-between;
 }
-
 .btn-group [class*="btn-"] {
     background-color: var(--main-color);
     color: white;
     padding: 1em 2.5em;
     border: 4px solid var(--secondary-color);
     border-radius: 30px;
-    cursor: pointer; 
+    cursor: poiter;
+    -webkit-transition: background-color 0.3s, border-color 0.3s ease-out;
     transition: background-color 0.3s, border-color 0.3s ease-out;
 }
-
 .btn-group [class*="btn-"]:disabled {
     background-color: var(--light-color);
     border-color: var(--lighter-color);
-    cursor: not-allowed; 
+    cursor: text;
 }
-
 .btn-group [class*="btn-"]:hover:not(:disabled) {
     background-color: var(--dark-color);
     border-color: var(--light-color);
 }
 
-
-
-/* control displying buttons */
 .btn-group .btn-submit {
-    display: none;
-}
-.btn-group .btn-press {
     display: none;
 }
 .form-two.active ~ .btn-group .btn-next {
@@ -391,22 +369,10 @@ form > div.active {
 .form-two.active ~ .btn-group .btn-submit {
     display: block;
 }
-.form-three.active ~ .btn-group .btn-next {
+.form-three.active ~ .btn-group .btn-next .btn-prev {
     display: none;
 }
-.form-three.active ~ .btn-group .btn-prev {
-    display: none;
-}
-/* not working */
-.form-three.active ~ .btn-group .btn-press {
-    display: block;
-}
 
-
-
-
-
-/* Responsive design */
 @media screen and (min-width: 768px) { 
     .form-box {
         flex-direction: row;
